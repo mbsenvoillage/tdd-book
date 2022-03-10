@@ -1,0 +1,11 @@
+{
+  "name": "tdd-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./js/test_money.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
