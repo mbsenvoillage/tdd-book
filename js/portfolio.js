@@ -23,15 +23,17 @@ class Portfolio {
     return money.amount * exchangeRates.get(key);
   }
 
-  evaluate(currency) {
+  evaluate(bank, currency) {
     let failures = [];
     let total = this.moneys.reduce((sum, money) => {
-      let convertedAmount = this.convert(money, currency);
-      if (convertedAmount == undefined) {
-        failures.push(money.currency + "->" + currency);
+      let convertedAmount;
+      try {
+        convertedAmount = bank.convert(money, currency);
+      } catch (e) {
+        failures.push(e.message);
         return sum;
       }
-      return sum + this.convert(money, currency);
+      return sum + convertedAmount.amount;
     }, 0);
     if (failures.length == 0) {
       return new Money(total, currency);
